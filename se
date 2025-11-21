@@ -45,3 +45,11 @@ docker stop nagiosdemo
 docker rm nagiosdemo
 docker images
 docker rmi jasonrivers/nagios:latest
+
+dockerfile aws:
+# Use official Nginx image
+FROM nginx:latest
+
+# Copy your HTML file into the Nginx web directory
+COPY index.html /usr/share/nginx/html/index.html
+
