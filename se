@@ -17,3 +17,20 @@ node {
         archiveArtifacts 'target/*.jar'
     }
 }
+
+
+
+
+minikube and nginx:
+minikube start
+kubectl create deployment mynginx --image=nginx
+kubectl set image deployment/mynginx nginx=nginx:latest
+kubectl get deployments
+kubectl get pods
+kubectl describe pods
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
+kubectl scale deployment mynginx --replicas=4
+kubectl get service myngnix
+kubectl port-forward svc/mynginx 8081:80
+kubectl delete deployment mynginx
+kubectl delete service mynginx
