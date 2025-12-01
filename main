@@ -75,3 +75,42 @@ sudo docker run –d –p 80:80 mywebapp
 
 
 https://github.com/budarajumadhurika/SampleMavenJavaProject
+
+
+
+
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: wp-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wp-site
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8181:80"   # http://localhost:8080
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppassword
+      WORDPRESS_DB_NAME: wordpress
+
+volumes:
+  db_data:
+
+//docker compose up -d
+//docker ps
+//docker compose stop
