@@ -50,7 +50,7 @@ dockerfile aws:
 # Use official Nginx image
 FROM nginx:latest
 # Copy your HTML file into the Nginx web directory
-COPY index.html /usr/share/nginx/html/index.html
+COPY . /usr/share/nginx/html
 
 
 aws:
