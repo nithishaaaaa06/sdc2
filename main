@@ -162,3 +162,24 @@ node {
     echo "✅ Done! Build cloned, tested, and JAR archived."
 }
 
+
+
+DOCKER IMAGE 
+
+DOCKERFILE:
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+INDEXFILE:
+<html>
+<body>
+    <h1>Hello from Docker! 🚀</h1>
+</body>
+</html>
+
+docker build -t my-image .
+docker run -p 8080:80 --name my-container my-image
+
+
