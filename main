@@ -78,6 +78,7 @@ https://github.com/budarajumadhurika/SampleMavenJavaProject
 
 
 
+DOCKER COMPOSE
 
 version: "3.9"
 
@@ -114,3 +115,50 @@ volumes:
 //docker compose up -d
 //docker ps
 //docker compose stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+JENKINS SCRIPTED
+
+node {
+    def mvn = tool('M3')  // Ensure Maven name is M3 in Jenkins tools
+
+    stage('Clone Code') {
+        git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+    }
+
+    stage('Build & Test') {
+        withEnv(["PATH+MAVEN=${mvn}/bin"]) {
+            if (isUnix()) {
+                sh 'mvn clean package'
+            } else {
+                bat 'mvn clean package'
+            }
+        }
+    }
+
+    stage('Test Report') {
+        junit '**/target/surefire-reports/TEST-*.xml'
+    }
+
+    stage('Archive JAR') {
+        archiveArtifacts '**/target/*.jar'
+    }
+
+    echo "✅ Done! Build cloned, tested, and JAR archived."
+}
+
