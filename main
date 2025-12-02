@@ -227,4 +227,26 @@ running:
 docker compose up --build
 http://localhost:3000
 
+PUSH DOCKER IMAGE :
+cal.js:
+function add(a,b){
+  return a+b;
+}
+function subtract(a,b){
+  return a-b;
+}
+console.log("addition:",add(2,3));
+console.log("subtraction:",subtract(4,1));
 
+Dockerfile:
+FROM node:16-alpine
+WORKDIR /app
+COPY cal.js /app
+CMD ["node", "cal.js"]
+
+docker build -t simple .
+docker run simple
+docker ps
+docker login
+docker tag simple nithishaa06/simple
+docker push nithishaa06/simple
