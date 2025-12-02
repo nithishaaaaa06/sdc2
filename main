@@ -244,9 +244,11 @@ WORKDIR /app
 COPY cal.js /app
 CMD ["node", "cal.js"]
 
-docker build -t simple .
+docker build -t simple .                   
 docker run simple
 docker ps
 docker login
 docker tag simple nithishaa06/simple
 docker push nithishaa06/simple
+to run on server:
+docker run -p 3000:3000 mynodeapp
