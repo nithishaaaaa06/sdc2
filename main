@@ -252,3 +252,6 @@ docker tag simple nithishaa06/simple
 docker push nithishaa06/simple
 to run on server:
 docker run -p 3000:3000 mynodeapp
+to delete image 
+docker rm id
+docker rmi nithishaa06/simple
